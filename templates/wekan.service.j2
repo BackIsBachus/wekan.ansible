@@ -1,0 +1,21 @@
+[Unit]
+Description=Wekan Server
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+StandardOutput=syslog
+SyslogIdentifier=Wekan
+User={{ wekan_service_user }}
+Group={{ wekan_service_group }}
+Environment=MONGO_URL=mongodb://{{ wekan_mongodb_server }}:{{ wekan_mongodb_port }}/wekan
+Environment=MONGO_OPLOG_URL=mongodb://{{ wekan_mongodb_server }}:{{ wekan_mongodb_port }}/local
+Environment=ROOT_URL=https://{{ wekan_service_host }}
+Environment=PORT={{ wekan_service_port }}
+WorkingDirectory={{ wekan_application_path }}
+ExecStart={{ wekan_node_10_40_path }}/node {{ wekan_application_path }}/bundle/main.js
+
+[Install]
+WantedBy=multi-user.target

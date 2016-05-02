@@ -1,0 +1,47 @@
+#!upstart
+#
+# Wekan upstart script
+# This upstart script makes use of Forever : https://github.com/nodejitsu/forever
+
+
+description "Wekan Server"
+
+start on startup
+stop on shutdown
+
+expect fork
+
+env NODE_BIN_DIR="{{ wekan_node_10_40_path }}"
+env NODE_PATH="/usr/local/lib/node_modules"
+env APPLICATION_PATH="{{ wekan_application_path }}/bundle/main.js"
+env PIDFILE="/var/run/wekan.pid"
+env LOG="/var/log/wekan.log"
+env MIN_UPTIME="5000"
+env SPIN_SLEEP_TIME="2000"
+
+chdir {{ wekan_application_path }}
+setuid {{ wekan_service_user }}
+setgid {{ wekan_service_group }}
+
+env MONGO_URL="mongodb://{{ wekan_mongodb_server }}:{{ wekan_mongodb_port }}/wekan"
+env MONGO_OPLOG_URL="mongodb://{{ wekan_mongodb_server }}:{{ wekan_mongodb_port }}/local"
+env ROOT_URL="https://{{ wekan_service_host }}"
+env PORT="{{ wekan_service_port }}"
+
+
+script
+    PATH=$NODE_BIN_DIR:$PATH
+
+    exec forever \
+      --pidFile $PIDFILE \
+      -a \
+      -l $LOG \
+      --minUptime $MIN_UPTIME \
+      --spinSleepTime $SPIN_SLEEP_TIME \
+      start $APPLICATION_PATH
+end script
+
+pre-stop script
+    PATH=$NODE_BIN_DIR:$PATH
+    exec forever stop $APPLICATION_PATH
+end script

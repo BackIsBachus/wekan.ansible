@@ -3,25 +3,25 @@
 # for documentation of all options, see:
 #   http://docs.mongodb.org/manual/reference/configuration-options/
 
-{% if rocket_chat_mongodb_fork is defined %}
+{% if wekan_mongodb_fork is defined %}
 # whether to fork the process or not
-fork = {{ rocket_chat_mongodb_fork }}
-{% endif %}  
-{% if rocket_chat_mongodb_pidfile_path is defined %}
-
-pidfilepath = {{ rocket_chat_mongodb_pidfile_path }}
+fork = {{ wekan_mongodb_fork }}
 {% endif %}
-{% if rocket_chat_mongodb_logpath is defined %}
+{% if wekan_mongodb_pidfile_path is defined %}
 
-logpath = {{ rocket_chat_mongodb_logpath }}
+pidfilepath = {{ wekan_mongodb_pidfile_path }}
 {% endif %}
-{% if rocket_chat_mongodb_unixsocketprefix is defined %}
+{% if wekan_mongodb_logpath is defined %}
 
-unixSocketPrefix = {{ rocket_chat_mongodb_unixsocketprefix }}
+logpath = {{ wekan_mongodb_logpath }}
 {% endif %}
-{% if rocket_chat_mongodb_dbpath is defined %}
+{% if wekan_mongodb_unixsocketprefix is defined %}
 
-dbpath = {{ rocket_chat_mongodb_dbpath }}
+unixSocketPrefix = {{ wekan_mongodb_unixsocketprefix }}
+{% endif %}
+{% if wekan_mongodb_dbpath is defined %}
+
+dbpath = {{ wekan_mongodb_dbpath }}
 {% endif %}
 
 {% if ansible_os_family == "Debian" %}
@@ -38,9 +38,9 @@ systemLog:
   path: /var/log/mongodb/mongod.log
 # network interfaces
 net:
-  port: {{ rocket_chat_mongodb_port }}
-  bindIp: {{ rocket_chat_mongodb_server }}
+  port: {{ wekan_mongodb_port }}
+  bindIp: {{ wekan_mongodb_server }}
 {% endif %}
 
 # replication
-{{ rocket_chat_mongodb_repl_lines }}
+{{ wekan_mongodb_repl_lines }}

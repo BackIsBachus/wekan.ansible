@@ -1,7 +1,7 @@
 ---
 
-  - name: Apply the Rocket.Chat role to all chat_servers
-    hosts: chat_servers
+  - name: Apply the Wekan role to all wekan_servers
+    hosts: wekan_servers
 
     roles:
-      - ../../RocketChat.Server
+      - ../../Wekan.Server

@@ -1,40 +1,40 @@
 ---
-# defaults/main.yml: Defaults for RocketChat.Ansible
-rocket_chat_automatic_upgrades: false
-rocket_chat_upgrade_backup: true
-rocket_chat_upgrade_backup_path: "{{ rocket_chat_application_path }}"
-rocket_chat_application_path: /var/lib/rocket.chat
-rocket_chat_version: latest
-rocket_chat_tarball_remote: https://rocket.chat/releases/{{ rocket_chat_version }}/download
-rocket_chat_tarball_sha256sum: 2bee49931331ebe1c5985f08db74dd93150ace3ead4404244176e2fffb657780
-rocket_chat_tarball_fetch_timeout: 100
-rocket_chat_tarball_validate_remote_cert: true
-rocket_chat_service_user: rocketchat
-rocket_chat_service_group: rocketchat
-rocket_chat_service_host: "{{ ansible_fqdn }}"
-rocket_chat_service_port: 3000
-rocket_chat_node_10_40_path: /usr/local/n/versions/node/0.10.40/bin
-rocket_chat_original_npm: /usr/bin/npm
+# defaults/main.yml: Defaults for Wekan.Ansible
+wekan_automatic_upgrades: false
+wekan_upgrade_backup: true
+wekan_upgrade_backup_path: "{{ wekan_application_path }}"
+wekan_application_path: /var/lib/wekan
+wekan_version: latest
+wekan_tarball_remote: https://github.com/wekan/wekan/releases/download/v{{ wekan_version }}/wekan-{{ wekan_version }}.tar.gz
+wekan_tarball_sha256sum: 2bee49931331ebe1c5985f08db74dd93150ace3ead4404244176e2fffb657780
+wekan_tarball_fetch_timeout: 100
+wekan_tarball_validate_remote_cert: true
+wekan_service_user: wekan
+wekan_service_group: wekan
+wekan_service_host: "{{ ansible_fqdn }}"
+wekan_service_port: 3000
+wekan_node_10_40_path: /usr/local/n/versions/node/0.10.40/bin
+wekan_original_npm: /usr/bin/npm
 
 # MongoDB settings
-rocket_chat_mongodb_packages: mongodb
-rocket_chat_include_mongodb: true
-rocket_chat_mongodb_keyserver: hkp://keyserver.ubuntu.com:80
-rocket_chat_mongodb_gpg_key: 7F0CEB10
-rocket_chat_mongodb_server: 127.0.0.1
-rocket_chat_mongodb_port: 27017
-rocket_chat_mongodb_config_template: mongod.conf.j2
+wekan_mongodb_packages: mongodb
+wekan_include_mongodb: true
+wekan_mongodb_keyserver: hkp://keyserver.ubuntu.com:80
+wekan_mongodb_gpg_key: 7F0CEB10
+wekan_mongodb_server: 127.0.0.1
+wekan_mongodb_port: 27017
+wekan_mongodb_config_template: mongod.conf.j2
 
 # nginx settings
-rocket_chat_include_nginx: true
-rocket_chat_ssl_generate_certs: true
-rocket_chat_ssl_key_path: /etc/nginx/rocket_chat.key
-rocket_chat_ssl_cert_path: /etc/nginx/rocket_chat.crt
-rocket_chat_ssl_deploy_data: false
-rocket_chat_ssl_key_file: ~
-rocket_chat_ssl_cert_file: ~
-rocket_chat_nginx_enable_pfs: true
-rocket_chat_nginx_generate_pfs_key: true
-rocket_chat_nginx_pfs_key_numbits: 2048
-rocket_chat_nginx_pfs_key_path: /etc/nginx/rocket_chat.pem
-rocket_chat_nginx_pfs_file: ~
+wekan_include_nginx: true
+wekan_ssl_generate_certs: true
+wekan_ssl_key_path: /etc/nginx/wekan.key
+wekan_ssl_cert_path: /etc/nginx/wekan.crt
+wekan_ssl_deploy_data: false
+wekan_ssl_key_file: ~
+wekan_ssl_cert_file: ~
+wekan_nginx_enable_pfs: true
+wekan_nginx_generate_pfs_key: true
+wekan_nginx_pfs_key_numbits: 2048
+wekan_nginx_pfs_key_path: /etc/nginx/wekan.pem
+wekan_nginx_pfs_file: ~

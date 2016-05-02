@@ -1,5 +1,5 @@
 ---
-# tasks/nginx.yml: Nginx management tasks for RocketChat.Ansible
+# tasks/nginx.yml: Nginx management tasks for Wekan.Ansible
 
   - name: Grant Nginx permissions to proxy requests to an upstream [SELinux]
     shell: setsebool httpd_can_network_connect on -P
@@ -16,49 +16,49 @@
       dest: "{{ item.dest }}"
     with_items:
       - { src: nginx.conf.j2, dest: /etc/nginx/nginx.conf }
-      - { src: rocket_chat.conf.j2, dest: /etc/nginx/conf.d/rocket_chat.conf }
+      - { src: wekan.conf.j2, dest: /etc/nginx/conf.d/wekan.conf }
     notify: Reload the Nginx service
 
   - name: Ensure provided SSL certs have been deployed
     copy:
       src: "{{ item.src }}"
       dest: "{{ item.dest }}"
-    when: not rocket_chat_ssl_generate_certs|bool and
-          rocket_chat_ssl_deploy_data|bool
+    when: not wekan_ssl_generate_certs|bool and
+          wekan_ssl_deploy_data|bool
     with_items:
-      - src: "{{ rocket_chat_ssl_key_file }}"
-        dest: "{{ rocket_chat_ssl_key_path }}"
-      - src: "{{ rocket_chat_ssl_cert_file }}"
-        dest: "{{ rocket_chat_ssl_cert_path }}"
+      - src: "{{ wekan_ssl_key_file }}"
+        dest: "{{ wekan_ssl_key_path }}"
+      - src: "{{ wekan_ssl_cert_file }}"
+        dest: "{{ wekan_ssl_cert_path }}"
     notify: Reload the Nginx service
 
   - name: Ensure SSL certs have been generated
     shell: >-
-      openssl req -x509 -newkey rsa:2048 -nodes
-      -subj "/CN={{ rocket_chat_service_host }}/
+      openssl req -x509 -newkey rsa:4096 -nodes
+      -subj "/CN={{ wekan_service_host }}/
       /C=NA/ST=NA/L=NA/O=NA/OU=NA"
-      -keyout {{ rocket_chat_ssl_key_path }}
-      -out {{ rocket_chat_ssl_cert_path }}
+      -keyout {{ wekan_ssl_key_path }}
+      -out {{ wekan_ssl_cert_path }}
       -days 3650
-    when: rocket_chat_ssl_generate_certs|bool
+    when: wekan_ssl_generate_certs|bool
     args:
-      creates: "{{ rocket_chat_ssl_key_path }}"
+      creates: "{{ wekan_ssl_key_path }}"
     notify: Reload the Nginx service
 
   - name: Ensure provided PFS key has been deployed
     copy:
-      src: "{{ rocket_chat_nginx_pfs_file }}"
-      dest: "{{ rocket_chat_nginx_pfs_key_path }}"
-    when: not rocket_chat_nginx_generate_pfs_key
+      src: "{{ wekan_nginx_pfs_file }}"
+      dest: "{{ wekan_nginx_pfs_key_path }}"
+    when: not wekan_nginx_generate_pfs_key
     notify: Reload the Nginx service
 
   - name: Ensure the PFS key has been generated (this can take a while!)
     shell: >-
-      openssl dhparam -out {{ rocket_chat_nginx_pfs_key_path }}
-      {{ rocket_chat_nginx_pfs_key_numbits }}
-    when: rocket_chat_nginx_generate_pfs_key|bool
+      openssl dhparam -out {{ wekan_nginx_pfs_key_path }}
+      {{ wekan_nginx_pfs_key_numbits }}
+    when: wekan_nginx_generate_pfs_key|bool
     args:
-      creates: "{{ rocket_chat_nginx_pfs_key_path }}"
+      creates: "{{ wekan_nginx_pfs_key_path }}"
     notify: Reload the Nginx service
 
   - name: Ensure the Nginx service is running/enabled

@@ -1,32 +1,32 @@
 ---
-# tasks/upgrade.yml: Rocket.Chat upgrade procedures for RocketChat.Ansible
+# tasks/upgrade.yml: Wekan upgrade procedures for Wekan.Ansible
 
   - name: Ensure automatic upgrades are permitted [UPGRADE]
     fail:
       msg: >-
         It doesn't look like you've permitted automatic upgrades.
-        A new version of Rocket.Chat was released.
-        To permit automatic upgrades set 'rocket_chat_automatic_upgrades' to true
-    when: not rocket_chat_automatic_upgrades|bool
+        A new version of Wekan was released.
+        To permit automatic upgrades set 'wekan_automatic_upgrades' to true
+    when: not wekan_automatic_upgrades|bool
 
   - name: Ensure the back up directory exists [UPGRADE]
     file:
-      path: "{{ rocket_chat_upgrade_backup_path }}"
+      path: "{{ wekan_upgrade_backup_path }}"
       state: directory
-    when: rocket_chat_upgrade_backup|bool
+    when: wekan_upgrade_backup|bool
 
-  - name: Back up the current Rocket.Chat instance [UPGRADE]
+  - name: Back up the current Wekan instance [UPGRADE]
     shell: >-
-      mv {{ rocket_chat_application_path }}/bundle
-      {{ rocket_chat_upgrade_backup_path }}/backup_{{ ansible_date_time.date }}
-    when: rocket_chat_upgrade_backup|bool
+      mv {{ wekan_application_path }}/bundle
+      {{ wekan_upgrade_backup_path }}/backup_{{ ansible_date_time.date }}
+    when: wekan_upgrade_backup|bool
 
-  - name: Delete the current Rocket.Chat instance [UPGRADE]
+  - name: Delete the current Wekan instance [UPGRADE]
     file:
-      path: "{{ rocket_chat_application_path }}/bundle"
+      path: "{{ wekan_application_path }}/bundle"
       state: absent
-    when: not rocket_chat_upgrade_backup|bool
+    when: not wekan_upgrade_backup|bool
 
-  - name: Set the Rocket.Chat upgrade status [UPGRADE]
+  - name: Set the Wekan upgrade status [UPGRADE]
     set_fact:
-      rocket_chat_upgraded: true
+      wekan_upgraded: true

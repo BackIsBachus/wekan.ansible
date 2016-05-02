@@ -1,10 +1,10 @@
 ---
-rocket_chat_service_update_command: >-
+wekan_service_update_command: >-
   initctl reload-configuration ;
-  service rocketchat restart
-rocket_chat_service_template:
-  src: rocketchat_upstart.j2
-  dest: /etc/init/rocketchat.conf
+  service wekan restart
+wekan_service_template:
+  src: wekan_upstart.j2
+  dest: /etc/init/wekan.conf
 
-rocket_chat_mongodb_apt_repo: "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse"
-rocket_chat_tarball_validate_remote_cert: false
+wekan_mongodb_apt_repo: "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse"
+wekan_tarball_validate_remote_cert: false

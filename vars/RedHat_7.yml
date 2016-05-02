@@ -1,8 +1,8 @@
 ---
-rocket_chat_service_update_command: >-
+wekan_service_update_command: >-
   systemctl daemon-reload ;
-  systemctl restart rocketchat
-rocket_chat_service_template:
-  src: rocketchat.service.j2
-  dest: /usr/lib/systemd/system/rocketchat.service
-rocket_chat_tarball_validate_remote_cert: false
+  systemctl restart wekan
+wekan_service_template:
+  src: wekan.service.j2
+  dest: /usr/lib/systemd/system/wekan.service
+wekan_tarball_validate_remote_cert: false
