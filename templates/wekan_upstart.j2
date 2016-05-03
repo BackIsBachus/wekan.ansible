@@ -27,6 +27,7 @@ env MONGO_URL="mongodb://{{ wekan_mongodb_server }}:{{ wekan_mongodb_port }}/wek
 env MONGO_OPLOG_URL="mongodb://{{ wekan_mongodb_server }}:{{ wekan_mongodb_port }}/local"
 env ROOT_URL="https://{{ wekan_service_host }}"
 env PORT="{{ wekan_service_port }}"
+env MAIL_URL="{{ wekan_service_smtp }}"
 
 
 script

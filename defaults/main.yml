@@ -6,13 +6,14 @@ wekan_upgrade_backup_path: "{{ wekan_application_path }}"
 wekan_application_path: /var/lib/wekan
 wekan_version: latest
 wekan_tarball_remote: https://github.com/wekan/wekan/releases/download/v{{ wekan_version }}/wekan-{{ wekan_version }}.tar.gz
-wekan_tarball_sha256sum: 2bee49931331ebe1c5985f08db74dd93150ace3ead4404244176e2fffb657780
+wekan_tarball_sha256sum: 5b207a75e5aa1fb3972e3007f1d7597cddabbc94cb90a5ae436aa9141420585e
 wekan_tarball_fetch_timeout: 100
 wekan_tarball_validate_remote_cert: true
 wekan_service_user: wekan
 wekan_service_group: wekan
 wekan_service_host: "{{ ansible_fqdn }}"
 wekan_service_port: 3000
+wekan_service_smtp: smtp://user:pass@mailserver.examples.com:25/
 wekan_node_10_40_path: /usr/local/n/versions/node/0.10.40/bin
 wekan_original_npm: /usr/bin/npm
 
